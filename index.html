@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game nuôi thú cưng</title>
+    <link rel="stylesheet" href="./public/css/style.css">
+    </link>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap" rel="stylesheet">
+    <!-- Link css  bootrap 4.1.1-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
+
 <body>
-    
+    <div id="coinCount" class="animated-button1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <img src="./public/images/dogIcon.png" alt="dogIcon" />
+        <h1 id="coinsTab">100</h1>
+    </div>
+    <div class="gridCont">
+        <div class="itemSide">
+            <h1 class="text-white">Hunger</h1>
+            <div id="progress">
+                <div id="progressBarHung"></div>
+            </div>
+            <h1 class="text-white">Thirst</h1>
+            <div id="progress">
+                <div id="progressBarThir"></div>
+            </div>
+            <h1 class="text-white">Happiness</h1>
+            <div id="progress">
+                <div id="progressBarHapp"></div>
+            </div>
+        </div>
+        <div class="itemMain">
+            <img src="./public/images/dogpoop.png" alt="poop" id="dogPoop" onClick="poopPickup(1)" />
+            <img src="./public/images/dogpee.png" alt="pee" id="dogPee" onClick="poopPickup(2)" />
+            <img src="./public/images/emptybowl.jpg" alt="food" id="dogFood" />
+            <img src="./public/images/emptybowl.jpg" alt="water" id="dogWater" />
+            <img src="./public/images/dogRug.png" alt="rug" id="dogRug" />
+            <img src="./public/images/dogHouse.png" alt="house" id="dogHouse" />
+            <img src="./public/images/dogsprite.gif" alt="dogThing" class="dogSprite dogSpriteAnimMain" id="dog" />
+            <img src="./public/images/dogsprite.gif" alt="dogThing2" class="dogSprite2 dogSpriteAnimMain2" id="dog2" />
+        </div>
+        <div class="itemShop">
+            <div class="shopItem">
+                <img src="./public/images/dopFood.jpg" alt="food" class="shopImg" />
+                <div>Dog food:20 coins</div>
+                <button onClick="replenish(1)" class="glow-on-hover">BUY</button>
+            </div>
+            <div class="shopItem">
+                <img src="./public/images/dogWater.jpg" alt="water" class="shopImg" />
+                <div>water:10 coins</div>
+                <button onClick="replenish(2)" class="glow-on-hover">BUY</button>
+            </div>
+            <div class="shopItem">
+                <img src="./public/images/dogToy.png" alt="toy" class="shopImg" />
+                <div>Dog toy:20 coins</div>
+                <button onClick="replenish(3)" class="glow-on-hover">BUY</button>
+            </div>
+            <div class="shopItem">
+                <img src="./public/images/dogstill.gif" alt="puppy" class="shopImg" />
+                <div>Puppy:100 coins</div>
+                <div>
+                    <button onClick="addPuppy()" class="glow-on-hover">BUY</button>
+                </div>
+            </div>
+            <div class="shopItem">
+                <img src="./public/images/dogHouse.png" alt="house" class="shopImg" />
+                <div>Dog House: 150 coins</div>
+                <button onClick="addHouse()" class="glow-on-hover">BUY</button>
+            </div>
+        </div>
+    </div>
+    <script src="./public/js/main.js"></script>
+    <!-- JS BOOTRAP -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </body>
+
 </html>
