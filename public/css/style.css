@@ -1,0 +1,353 @@
+/*grid settings and main containers */
+@import "./point.css";
+html{
+    background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949 !important;
+    /* border: #EF6F6C 10px solid; */
+    font-family: 'Zen Loop', cursive;
+}
+body{
+    background: transparent !important;
+  }
+.glow-on-hover {
+    padding: 4px 16px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #81d4fa;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    border-radius: 10px;
+}
+.glow-on-hover:active {
+    color: #81d4fa
+}
+.glow-on-hover:active:after {
+    background: transparent;
+}
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #81d4fa;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+button:focus{
+    outline: none !important;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+hr{
+    color:#EF6F6C;
+}
+.itemMain{
+    grid-area: main;
+    border: #EF6F6C 2px solid;
+    background-color: #632E2D;
+}
+.itemSide{
+    grid-area: side;
+    border: #EF6F6C 2px solid
+
+}
+.itemShop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: shop;
+    border: #EF6F6C 2px solid;
+    padding: 16px 32px;
+}
+.itemShop div{
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 600;
+    margin: 8px 0px;
+    color: #ffffff;
+}
+
+.gridCont{
+    display:grid;
+    height:100vh;
+    width:100%;
+    grid-template-areas:
+    'side main main main main main main main'
+    'side main main main main main main main'
+    'shop shop shop shop shop shop shop shop';
+    grid-gap: 5px;
+}
+/* End grid and main styling*/
+/*Coin cointainer*/
+.animated-button1{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right:0;
+    top:0;
+    /* margin:4vh; */
+    padding:1vh;
+    background-color:#EF6F6C;
+    z-index: 2;
+    /* border: #D1ABAD 2px solid; */
+}
+#coinCount img{
+    height:8vh;
+    width: 5vw;
+}
+/* end cointainer */
+#dogPoop{
+    position:absolute;
+    height:5vh;
+    display:none;
+}
+#dogPee{
+    position: absolute;
+    height:5vh;
+    display:none;
+}
+#dogFood{
+    position: absolute;
+    height: 5vh;
+}
+#dogWater{
+    position: static;
+    height:5vh;
+    margin-top: 30px;
+}
+#dogRug{
+    position: absolute;
+    left:40vw;
+    top:25vh;
+    height:15vh;
+    display:none;
+    z-index: 0;
+}
+#dogHouse {
+    position :absolute;
+    left:80vw;
+    top:45vh;
+    height: 15vh;
+    display: none;
+}
+/*end grid settings and main containers */
+/* dog animation */
+
+.dogSprite{
+    height:10vh;
+    position: relative;
+}
+.dogSprite2{
+    height:6.5vh;
+    position: relative;
+    display:none;
+}
+.dogSpriteAnimMain{
+    animation-name: dogMovement;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+.dogSpriteAnimMain2 {
+    animation-name: dogMovement2;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+.dogSpriteAnimMain3{
+    animation-name: dogMovement3;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+}
+.dogSpriteAnimFeed{
+    animation-name: dogFeed;
+    animation-duration: 20s;
+}
+.dogSpriteAnimSleep{
+    animation-name: dogSleep;
+    animation-duration: 20s;
+}
+@keyframes dogMovement {
+    0% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        left:0%;
+        top:0%;
+    }
+    25% {
+        left:85%;
+        top: 25%;
+    }
+    50% {
+        left:80%;
+        top:70%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    75%{
+        left:20%;
+        top:70%;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    90%{
+        left:55%;
+        top:40%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    100%{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        left:0%;
+        top:0%;
+    }
+}
+@keyframes dogMovement2 {
+    0% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        left:0%;
+        top:0%;
+    }
+    25% {
+        left:45%;
+        top: 70%;
+    }
+    50% {
+        left:20%;
+        top:70%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    75%{
+        left:80%;
+        top:70%;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    90%{
+        left:55%;
+        top:40%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    100%{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        left:0%;
+        top:0%;
+    }
+}
+@keyframes dogMovement3 {
+    0% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        left:0%;
+        top:0%;
+    }
+    25% {
+        left:20%;
+        top: 50%;
+    }
+    50% {
+        left:50%;
+        top:20%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    75%{
+        left:32%;
+        top:70%;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    90%{
+        left:80%;
+        top:15%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    100%{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        left:0%;
+        top:0%;
+    }
+}
+@keyframes dogFeed {
+    100%{
+        -webkit-transform: scaleX(1);
+        left:0%;
+        top:1%;
+    }
+}
+@keyframes dogSleep {
+    100%{
+        left:40vw;
+        top:25vh;
+    }
+
+}
+/* end dog animation */
+/* progress bar style */
+#progress{
+    background-color: white;
+    width:95%;
+    height:5vh;
+    border: #632E2D 2px solid;
+    margin: .5vh
+}
+#progressBarHung{
+    background-color: red;
+    width:100%;
+    height:100%;
+}
+#progressBarThir{
+    background-color: blue;
+    width:100%;
+    height:100%;
+}
+#progressBarHapp{
+    background-color: green;
+    width:100%;
+    height:100%;
+}
+/* end progress bar */
+/* shop styling */
+.shopItem{
+    text-align: center;
+    margin-top: 5vh;
+    margin-left: 4vw;
+    margin-right: 4vw;
+}
+.shopImg{
+    width: 80px;
+    height: 80px;
+    border: #EF6F6C 2px solid;
+    border-radius: 50%;
+}
+  
