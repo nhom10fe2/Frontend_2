@@ -88,18 +88,18 @@ let poopPickup = (type) => {
 }
 let setHungerProgress = (data) => {
   hungerProgress.setAttribute('aria-valuenow', data);
-  hungerProgress.setAttribute('style', 'width:' + Number(data).toFixed(2) + '%');
-  hungerProgress.innerHTML = `<b>${Number(data).toFixed(2) + '%'}</b>`
+  hungerProgress.setAttribute('style', 'width:' + Number(data).toFixed(0) + '%');
+  hungerProgress.innerHTML = `<b>${Number(data).toFixed(0) + '%'}</b>`
 }
 let setThirstProgress = (data) => {
   thirstProgress.setAttribute('aria-valuenow', data);
-  thirstProgress.setAttribute('style', 'width:' + Number(data).toFixed(2) + '%');
-  thirstProgress.innerHTML = `<b>${(Number(data) + '%')}</b>`
+  thirstProgress.setAttribute('style', 'width:' + Number(data).toFixed(0) + '%');
+  thirstProgress.innerHTML = `<b>${(Number(data).toFixed(0) + '%')}</b>`
 }
 let setHappinessProgress = (data) => {
   happinessProgress.setAttribute('aria-valuenow', data);
-  happinessProgress.setAttribute('style', 'width:' + Number(data).toFixed(2) + '%');
-  happinessProgress.innerHTML = `<b>${(Number(data).toFixed(2) + '%')}</b>`
+  happinessProgress.setAttribute('style', 'width:' + Number(data).toFixed(0) + '%');
+  happinessProgress.innerHTML = `<b>${(Number(data).toFixed(0) + '%')}</b>`
 }
 
 let replenish = (type) => {
@@ -249,4 +249,4 @@ let closeNotication = () => {
 
 }
 setInterval(time, 10000);
-setInterval(poopGen, 9000);
+setInterval(poopGen, 7000);
