@@ -17,6 +17,15 @@
 </head>
 
 <body>
+    <!-- <div class="start-game" id="start-game">
+        <div class="title-game w-100 text-center text-white">Game nuôi thú cưng</div>
+        <div class="btn-help">
+            <button onClick="help()" class="glow-on-hover" id="help-game">Help</button>
+        </div>
+        <div class="btn-start">
+            <button onClick="start()" class="glow-on-hover" id="start-game">Start</button>
+        </div>
+    </div> -->
     <div id="coinCount" class="animated-button1">
         <span></span>
         <span></span>
@@ -25,19 +34,28 @@
         <img src="./public/images/dogIcon.png" alt="dogIcon" />
         <h1 id="coinsTab">100</h1>
     </div>
-    <div class="gridCont">
+    <div class="gridCont" id="gridCont">
         <div class="itemSide">
-            <h1 class="text-white">Hunger</h1>
-            <div id="progress">
-                <div id="progressBarHung"></div>
+            <h1 class="text-white">Thức ăn</h1>
+            <div class="progress">
+                <div id="progressBarHung" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                    role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                </div>
             </div>
-            <h1 class="text-white">Thirst</h1>
-            <div id="progress">
-                <div id="progressBarThir"></div>
+            <div class="mt-4 mb-4">
+                <h1 class="text-white">Nước Uống</h1>
+                <div class="progress">
+                    <div id="progressBarThir" class="progress-bar  progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
             </div>
-            <h1 class="text-white">Happiness</h1>
-            <div id="progress">
-                <div id="progressBarHapp"></div>
+            <h1 class="text-white">Cảm xúc</h1>
+
+            <div class="progress">
+                <div id="progressBarHapp" class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                    role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                </div>
             </div>
         </div>
         <div class="itemMain">
@@ -53,31 +71,42 @@
         <div class="itemShop">
             <div class="shopItem">
                 <img src="./public/images/dopFood.jpg" alt="food" class="shopImg" />
-                <div>Dog food:20 coins</div>
+                <div>Thức ăn:20 coins</div>
                 <button onClick="replenish(1)" class="glow-on-hover">BUY</button>
             </div>
             <div class="shopItem">
                 <img src="./public/images/dogWater.jpg" alt="water" class="shopImg" />
-                <div>water:10 coins</div>
+                <div>Nước uống:10 coins</div>
                 <button onClick="replenish(2)" class="glow-on-hover">BUY</button>
             </div>
             <div class="shopItem">
                 <img src="./public/images/dogToy.png" alt="toy" class="shopImg" />
-                <div>Dog toy:20 coins</div>
+                <div>Đồ chơi:20 coins</div>
                 <button onClick="replenish(3)" class="glow-on-hover">BUY</button>
             </div>
             <div class="shopItem">
                 <img src="./public/images/dogstill.gif" alt="puppy" class="shopImg" />
-                <div>Puppy:100 coins</div>
+                <div>Cún con:100 coins</div>
                 <div>
                     <button onClick="addPuppy()" class="glow-on-hover">BUY</button>
                 </div>
             </div>
             <div class="shopItem">
                 <img src="./public/images/dogHouse.png" alt="house" class="shopImg" />
-                <div>Dog House: 150 coins</div>
-                <button onClick="addHouse()" class="glow-on-hover">BUY</button>
+                <div>Nhà: 150 coins</div>
+                <button onClick="addHouse()" class="glow-on-hover" id="addHouse">BUY</button>
             </div>
+        </div>
+    </div>
+    <div class="notication" id="notication">
+        <div class="icon-warnning text-center">
+            <img src="./public/images/warnning-removebg.png" alt="" srcset="" style="width: 150px;">
+        </div>
+        <div class="text-center pt-2 pb-3" id="title-notication">
+
+        </div>
+        <div class="w-100 text-center">
+            <button onClick="closeNotication()" class="glow-on-hover">Đóng</button>
         </div>
     </div>
     <script src="./public/js/main.js"></script>
