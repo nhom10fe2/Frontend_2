@@ -48,14 +48,14 @@ let time = () => {
     dog2.className = 'dogSprite2 dogSpriteAnimMain2';
     dog2.src = "./public/images/dogsprite.gif";
   }
-  if (hunger <= 0 || thirst <= 0) {
-    alert("Your pet is dying, please take care of them ;(");
+  if (hunger <= 0 || thirst <= 0 || happiness<=0) {
+    alert("Game over");
   }
 
   else {
-    thirst -= .5;
-    hunger -= .5;
-    happiness = (thirst + hunger) / 3;
+    thirst -= 8;
+    hunger -= 4;
+    happiness = (thirst + hunger) / 4;
     setHungerProgress(hunger);
     setThirstProgress(thirst);
     setHappinessProgress(happiness);
