@@ -14,14 +14,40 @@ let poopSprite = document.getElementById('dogPoop');
 let peeSprite = document.getElementById('dogPee');
 let foodBowl = document.getElementById('dogFood');
 let waterBowl = document.getElementById('dogWater');
+let startGames = document.getElementById('start-game');
+startGames.style.display = "block";
+let coinCount = document.getElementById('coinCount');
+coinCount.style.display = "none";
+let gridCont = document.getElementById('gridCont');
+gridCont.style.display = "none";
 document.getElementById("notication").style.display = "none";
-//Function below returns a random number between the two arguments you give it.
+let gameOver = document.getElementById('gameOver');
+gameOver.style.display = "none"
+var audio, playbtn, mutebtn, seek_bar;
+audio = new Audio();
+document.getElementById("template-help").style.display = "none";
+
+window.onload = function() {
+  // audio.src = "./public/music/start-game.mp3";
+  // audio.loop = true;
+  // audio.oncanplaythrough = (event) => {
+  //   var playedPromise = audio.play();
+  //   if (playedPromise) {
+  //     playedPromise.catch((e) => {
+  //       if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+  //         audio.pause();
+  //         audio.load()
+  //       }
+  //     }).then(() => {
+  //       console.log("playing sound !!!");
+  //     });
+  //   }
+  // }
+}
+
 let randomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
 }
-/* time is a function that runs every 20 seconds by using setInterval which is at the end of the script,
-this function, every 20 seconds will decrease hunger, thirst and switch the animation that is currently
-placed on the dog by switching classes. This function also checks if values are too low and gives you an alert stating so.*/
 let time = () => {
   let animNumber = Math.round(randomNumber(0, 3));
   if (animNumber == 0) {
@@ -48,14 +74,16 @@ let time = () => {
     dog2.className = 'dogSprite2 dogSpriteAnimMain2';
     dog2.src = "./public/images/dogsprite.gif";
   }
-  if (hunger <= 0 || thirst <= 0 || happiness<=0) {
-    alert("Game over");
+  if (hunger <= 0 || thirst <= 0 || happiness <= 0) {
+    configTypeButton("none");
+    gameOver.style.display = "block"
+    audio.pause();
   }
 
   else {
-    thirst -= 8;
-    hunger -= 4;
-    happiness = (thirst + hunger) / 4;
+    // thirst -= 8;
+    // hunger -= 4;
+    // happiness -= 10;
     setHungerProgress(hunger);
     setThirstProgress(thirst);
     setHappinessProgress(happiness);
@@ -63,15 +91,18 @@ let time = () => {
 };
 
 let poopGen = () => {
-  let fecesType = Math.round(randomNumber(0, 2));
+  let fecesType = Math.round(randomNumber(1, 2));
+  // console.log(fecesType);
+  // 1: phân
+  // 2: nước
   if (fecesType == 1) {
-    poopSprite.style.left = randomNumber(25, 50) + "vw";
-    poopSprite.style.top = randomNumber(15, 30) + "vh";
+    poopSprite.style.left = randomNumber(40, 60) + "vw";
+    poopSprite.style.top = randomNumber(45, 59) + "vh";
     poopSprite.style.display = "block";
   }
   else if (fecesType == 2) {
-    peeSprite.style.left = randomNumber(25, 30) + "vw";
-    peeSprite.style.top = randomNumber(15, 20) + "vh";
+    peeSprite.style.left = randomNumber(40, 60) + "vw";
+    peeSprite.style.top = randomNumber(45, 59) + "vh";
     peeSprite.style.display = "block";
   }
 }
@@ -105,6 +136,7 @@ let setHappinessProgress = (data) => {
 let replenish = (type) => {
   if (type == 1) {
     if (hunger == 100) {
+      configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
       <span>Thức ăn của cún đã </span>
@@ -112,7 +144,8 @@ let replenish = (type) => {
       <b>đầy đủ</b>
       `
     }
-    if (coins < 20) {
+    else if (coins < 20) {
+      configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
       <span>Bạn không đủ điểm để mua thêm </span>
@@ -136,6 +169,7 @@ let replenish = (type) => {
   }
   else if (type == 2) {
     if (thirst == 100) {
+      configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
       <span>Nước uống của cún đã </span>
@@ -143,7 +177,8 @@ let replenish = (type) => {
       <b>đầy đủ</b>
       `
     }
-    if (coins < 10) {
+    else if (coins < 10) {
+      configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
       <span>Bạn không đủ điểm để mua thêm</span>
@@ -167,6 +202,7 @@ let replenish = (type) => {
   }
   else if (type == 3) {
     if (happiness == 100) {
+      configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
       <span>Cảm xúc cún của bạn đã đạt</span>
@@ -174,7 +210,8 @@ let replenish = (type) => {
       <b>100%</b>
       `
     }
-    if (coins < 20) {
+    else if (coins < 20) {
+      configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
       <span>Bạn không đủ điểm để mua thêm</span>
@@ -217,18 +254,15 @@ let addPuppy = () => {
     coinTab.textContent = coins
   }
 }
-// let addRug = () => {
-//   if (coins <= 50) {
+let configTypeButton = (type) => {
+  if (type === "none") {
+    document.querySelector('button').disabled = true;
+  } else {
+    document.querySelector('button').disabled = false;
+  }
 
-//   }
-//   else if (coins >= 50) {
-//     document.getElementById("dogRug").style.display = "block";
-//     coins -= 50;
-//     coinTab.textContent = coins
-//   }
-//   document.getElementById("dogRug").style.display = "block";
-//   coins -= 50;
-// }
+}
+
 let addHouse = () => {
   if (coins < 150) {
     document.getElementById("notication").style.display = "block";
@@ -246,7 +280,91 @@ let addHouse = () => {
 };
 let closeNotication = () => {
   document.getElementById("notication").style.display = "none";
-
+  configTypeButton("block")
 }
-setInterval(time, 10000);
-setInterval(poopGen, 7000);
+let help = () => {
+  document.getElementById("template-help").style.display = "block"
+}
+let start = () => {
+//  setTimeout(() => {
+//   audio.pause();
+//  }, 100);
+  startGames.style.display = "none";
+  coinCount.style.display = "flex"
+  gridCont.style.display = "block";
+  time();
+  poopGen();
+  // initAudioPlayer();
+  setInterval(time, 10000);
+  setInterval(poopGen, 7000);
+}
+let continueGame = () => {
+  coins -=coins;
+  setTimeout(() => {
+    count = 0;
+    hunger = 100;
+    thirst = 100;
+    happiness = 100;
+    coins = 100;
+  }, 100);
+  startGames.style.display = "none";
+  coinCount.style.display = "flex"
+  gridCont.style.display = "block";
+  time();
+  poopGen();
+  // initAudioPlayer();
+  setInterval(time, 10000);
+  setInterval(poopGen, 7000);
+  gameOver.style.display = "none"
+}
+let blackGame = () => {
+  audio.pause();
+  startGames.style.display = "block";
+  coinCount.style.display = "none";
+  gridCont.style.display = "none";
+  gameOver.style.display = "none"
+}
+function initAudioPlayer() {
+  audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
+  audio.loop = true;
+  audio.oncanplaythrough = (event) => {
+    var playedPromise = audio.play();
+    if (playedPromise) {
+      playedPromise.catch((e) => {
+        console.log(e)
+        if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+          console.log(e.name);
+        }
+      }).then(() => {
+        console.log("playing sound !!!");
+      });
+    }
+  }
+  // Set object references
+  playbtn = document.getElementById("playpausebtn");
+  mutebtn = document.getElementById("mutebtn");
+  playbtn.addEventListener("click", playPause);
+  mutebtn.addEventListener("click", mute);
+  function playPause() {
+    if (audio.paused) {
+      audio.play();
+      playbtn.style.background = "url(https://image.flaticon.com/icons/svg/189/189889.svg) no-repeat";
+    } else {
+      audio.pause();
+      playbtn.style.background = "url(https://image.flaticon.com/icons/svg/148/148744.svg) no-repeat";
+    }
+  }
+  function mute() {
+    if (audio.muted) {
+      audio.muted = false;
+      mutebtn.style.background = "url(https://image.flaticon.com/icons/svg/204/204287.svg) no-repeat";
+    } else {
+      audio.muted = true;
+      mutebtn.style.background = "url(https://image.flaticon.com/icons/svg/148/148757.svg) no-repeat";
+    }
+  }
+}
+let closeTempalteHelp = () => {
+  document.getElementById("template-help").style.display = "none";
+  // document.getElementById("template-help").style.animation
+}
