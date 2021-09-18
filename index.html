@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/x-icon" href="./public/images/pixlr-bg-result.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game nuôi thú cưng</title>
+    <title >PET GAME</title>
     <link rel="stylesheet" href="./public/css/style.css">
     </link>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Black+Ops+One">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap" rel="stylesheet">
     <!-- Link css  bootrap 4.1.1-->
@@ -17,15 +19,12 @@
 </head>
 
 <body>
-    <!-- <div class="start-game" id="start-game">
-        <div class="title-game w-100 text-center text-white">Game nuôi thú cưng</div>
-        <div class="btn-help">
-            <button onClick="help()" class="glow-on-hover" id="help-game">Help</button>
+    <div class="start-game" id="start-game">
+        <div class="menu-game">
+            <h3 class="menu-item" onClick="start()" id="start-game">Start</h3>
+            <h3 class="menu-item" onClick="help()">Help</h3>
         </div>
-        <div class="btn-start">
-            <button onClick="start()" class="glow-on-hover" id="start-game">Start</button>
-        </div>
-    </div> -->
+    </div>
     <div id="coinCount" class="animated-button1">
         <span></span>
         <span></span>
@@ -35,66 +34,87 @@
         <h1 id="coinsTab">100</h1>
     </div>
     <div class="gridCont" id="gridCont">
-        <div class="itemSide">
-            <h1 class="text-white">Thức ăn</h1>
-            <div class="progress">
-                <div id="progressBarHung" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                </div>
-            </div>
-            <div class="mt-4 mb-4">
-                <h1 class="text-white">Nước Uống</h1>
+        <div class="main-game">
+            <div class="itemSide">
+                <h1 class="text-white title-item">Thức ăn</h1>
                 <div class="progress">
-                    <div id="progressBarThir" class="progress-bar  progress-bar-striped progress-bar-animated"
+                    <div id="progressBarHung" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                         role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
-            </div>
-            <h1 class="text-white">Cảm xúc</h1>
-
-            <div class="progress">
-                <div id="progressBarHapp" class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                <div class="mt-3 mb-3">
+                    <h1 class="text-white title-item">Nước Uống</h1>
+                    <div class="progress">
+                        <div id="progressBarThir" class="progress-bar  progress-bar-striped progress-bar-animated"
+                            role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-white title-item">Cảm xúc</h1>
+                <div class="progress">
+                    <div id="progressBarHapp" class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div class="music mt-5">
+                    <button id="playpausebtn"></button>
+                    <button id="mutebtn" class="ml-2"></button>
                 </div>
             </div>
-        </div>
-        <div class="itemMain">
-            <img src="./public/images/dogpoop.png" alt="poop" id="dogPoop" onClick="poopPickup(1)" />
-            <img src="./public/images/dogpee.png" alt="pee" id="dogPee" onClick="poopPickup(2)" />
-            <img src="./public/images/emptybowl.jpg" alt="food" id="dogFood" />
-            <img src="./public/images/emptybowl.jpg" alt="water" id="dogWater" />
-            <img src="./public/images/dogRug.png" alt="rug" id="dogRug" />
-            <img src="./public/images/dogHouse.png" alt="house" id="dogHouse" />
-            <img src="./public/images/dogsprite.gif" alt="dogThing" class="dogSprite dogSpriteAnimMain" id="dog" />
-            <img src="./public/images/dogsprite.gif" alt="dogThing2" class="dogSprite2 dogSpriteAnimMain2" id="dog2" />
+            <div class="itemMain">
+                <img src="./public/images/dogpoop.png" alt="poop" id="dogPoop" onClick="poopPickup(1)" />
+                <img src="./public/images/dogpee.png" alt="pee" id="dogPee" onClick="poopPickup(2)" />
+                <img src="./public/images/emptybowl.jpg" alt="food" id="dogFood" />
+                <img src="./public/images/emptybowl.jpg" alt="water" id="dogWater" />
+                <img src="./public/images/dogRug.png" alt="rug" id="dogRug" />
+                <img src="./public/images/dogHouse.png" alt="house" id="dogHouse" />
+                <img src="./public/images/dogsprite.gif" alt="dogThing" class="dogSprite dogSpriteAnimMain" id="dog" />
+                <img src="./public/images/dogsprite.gif" alt="dogThing2" class="dogSprite2 dogSpriteAnimMain2"
+                    id="dog2" />
+            </div>
         </div>
         <div class="itemShop">
             <div class="shopItem">
-                <img src="./public/images/dopFood.jpg" alt="food" class="shopImg" />
-                <div>Thức ăn:20 coins</div>
-                <button onClick="replenish(1)" class="glow-on-hover">BUY</button>
-            </div>
-            <div class="shopItem">
-                <img src="./public/images/dogWater.jpg" alt="water" class="shopImg" />
-                <div>Nước uống:10 coins</div>
-                <button onClick="replenish(2)" class="glow-on-hover">BUY</button>
-            </div>
-            <div class="shopItem">
-                <img src="./public/images/dogToy.png" alt="toy" class="shopImg" />
-                <div>Đồ chơi:20 coins</div>
-                <button onClick="replenish(3)" class="glow-on-hover">BUY</button>
-            </div>
-            <div class="shopItem">
-                <img src="./public/images/dogstill.png" alt="puppy" class="shopImg" />
-                <div>Cún con:100 coins</div>
                 <div>
-                    <button onClick="addPuppy()" class="glow-on-hover">BUY</button>
+                    <img src="./public/images/dopFood.jpg" alt="food" class="shopImg" />
+                    <div class="badge-coins">20</div>
+                </div>
+                <div class="title-shop">Thức ăn</div>
+                <button onClick="replenish(1)" class="glow-on-hover" id="addFood">Mua</button>
+            </div>
+            <div class="shopItem">
+                <div>
+                    <img src="./public/images/dogWater.jpg" alt="water" class="shopImg" />
+                    <div class="badge-coins">10</div>
+                </div>
+                <div class="title-shop">Nước uống</div>
+                <button onClick="replenish(2)" class="glow-on-hover" id="addWater">Mua</button>
+            </div>
+            <div class="shopItem">
+                <div>
+                    <img src="./public/images/dogToy.png" alt="toy" class="shopImg" />
+                    <div class="badge-coins">20</div>
+                </div>
+                <div class="title-shop">Đồ chơi</div>
+                <button onClick="replenish(3)" class="glow-on-hover" id="addToy">Mua</button>
+            </div>
+            <div class="shopItem">
+                <div>
+                    <img src="./public/images/dogstill.png" alt="puppy" class="shopImg" />
+                    <div class="badge-coins">100</div>
+                </div>
+                <div class="title-shop">Cún con</div>
+                <div>
+                    <button onClick="addPuppy()" class="glow-on-hover" id="addPuppy">Mua</button>
                 </div>
             </div>
             <div class="shopItem">
-                <img src="./public/images/dogHouse.png" alt="house" class="shopImg" />
-                <div>Nhà: 150 coins</div>
-                <button onClick="addHouse()" class="glow-on-hover" id="addHouse">BUY</button>
+                <div>
+                    <img src="./public/images/dogHouse.png" alt="house" class="shopImg" />
+                    <div class="badge-coins">150</div>
+                </div>
+                <div class="title-shop">Nhà</div>
+                <button onClick="addHouse()" class="glow-on-hover" id="addHouse">Mua</button>
             </div>
         </div>
     </div>
@@ -107,6 +127,45 @@
         </div>
         <div class="w-100 text-center">
             <button onClick="closeNotication()" class="glow-on-hover">Đóng</button>
+        </div>
+    </div>
+    <div class="game-over" id="gameOver">
+        <div class="gameover">
+            <p> GAME </p>
+            <p> OVER </p>
+        </div>
+        <div class="continue">
+            <p> BẠN CÓ MUỐN TIẾP TỤC CHƠI GAME ? </p>
+        </div>
+
+        <div class="opcoes">
+            <div class="yes" id="continue" onClick="continueGame()"> TIẾP TỤC </div>
+            <div class="no" id="black" onClick="blackGame()"> THOÁT</div>
+        </div>
+    </div>
+    <div class="template-help" id="template-help">
+        <div class="content-help">
+            <div class="font-weight-bold text-center title-content-help mb-2">CÁCH CHƠI GAME NUÔI THÚ CƯNG</div>
+            <div class="mb-2">1. Nhấn Start để bắt đầu chơi.</div>
+            <div class="mb-2">2. Bạn được tặng 2 lần mua thức ăn miễn phí.</div>
+            <div class="mb-2">3. Hãy duy trì Thức ăn, Nước uống và Cảm xúc lớn hơn 0. Nếu Thức ăn, Nước uống và Cảm xúc bằng 0 hoặc
+                nhỏ hơn 0 thid Game kết thúc. </div>
+            <div class="mb-2">1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+            <div>1. Nhấn Start để bắt đầu chơi.</div>
+
+        </div>
+        <div class="w-100 text-center">
+            <button onClick="closeTempalteHelp()" class="glow-on-hover">Đóng</button>
         </div>
     </div>
     <script src="./public/js/main.js"></script>

@@ -1,27 +1,32 @@
 /*grid settings and main containers */
 @import url('https://fonts.googleapis.com/css2?family=Allison&display=swap');
 @import "./point.css";
+@import url('https://fonts.googleapis.com/css?family=Poppins:900i');
+@import url('https://fonts.googleapis.com/css?family=Just+Another+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Black+Ops+One');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
 html{
     background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949 !important;
     /* border: #EF6F6C 10px solid; */
     font-family: 'Zen Loop', cursive;
+    overflow: hidden !important;
 }
 body{
     background: transparent !important;
   }
 .glow-on-hover {
-    padding: 4px 16px;
+    width: 100px;
+    height: 36px;
     border: none;
     outline: none;
     color: #fff;
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) !important;
+    background: #111;
     cursor: pointer;
     position: relative;
     z-index: 0;
     border-radius: 10px;
-    font-weight: 600;
-    animation: glowing 20s linear infinite;
 }
+
 .glow-on-hover:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
@@ -35,34 +40,38 @@ body{
     height: calc(100% + 4px);
     animation: glowing 20s linear infinite;
     opacity: 0;
-    transition: opacity .5s ease-in-out;
+    transition: opacity .3s ease-in-out;
     border-radius: 10px;
 }
+
 .glow-on-hover:active {
-    animation: glowing 20s linear infinite;
-    color: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) !important;
+    color: #ffffff;
+    background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949 !important;;
 }
+
 .glow-on-hover:active:after {
-    background: transparent;
+    background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949 !important;;
 }
+
 .glow-on-hover:hover:before {
     opacity: 1;
 }
+.glow-on-hover:focus{
+    outline: none;
+}
+
 .glow-on-hover:after {
     z-index: -1;
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    animation: glowing 20s linear infinite;
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000) !important;
+    background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949 !important;;
     left: 0;
     top: 0;
     border-radius: 10px;
 }
-button:focus{
-    outline: none !important;
-}
+
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
@@ -72,78 +81,88 @@ hr{
     color:#EF6F6C;
 }
 .itemMain{
-    grid-area: main;
+    width: 75%;
     border: #EF6F6C 2px solid;
-    background-color: #632E2D;
+    background-image: url(../images/bg-main-game.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
 }
 .itemSide{
-    grid-area: side;
-    border: #EF6F6C 2px solid
+    padding: 0 8px;
+    width: 25%;
+    border: #EF6F6C 2px solid;
+    margin-right: 8px;
 
 }
 .itemShop{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    grid-area: shop;
     border: #EF6F6C 2px solid;
-    padding: 16px 32px;
+    padding: 24px 32px;
 }
-.itemShop div{
+.itemShop .title-shop{
     font-size: 18px;
     font-style: italic;
     font-weight: 600;
     margin: 8px 0px;
     color: #ffffff;
+    font-family: Oswald;
 }
 
 .gridCont{
-    display:grid;
-    height:100vh;
+    height:82vh;
     width:100%;
-    grid-template-areas:
-    'side main main main main main main main'
-    'side main main main main main main main'
-    'shop shop shop shop shop shop shop shop';
-    grid-gap: 5px;
 }
-/* End grid and main styling*/
-/*Coin cointainer*/
+.main-game{
+    display: flex;
+    height: 409px;
+    margin-bottom: 8px;
+}
+.title-item{
+    font-family: Oswald;
+}
+
 .animated-button1{
     display: flex;
     justify-content: center;
     position: absolute;
     right:0;
     top:0;
-    /* margin:4vh; */
     padding:1vh;
     background-color:#EF6F6C;
     z-index: 2;
-    /* border: #D1ABAD 2px solid; */
 }
 #coinCount img{
-    height:8vh;
-    width: 5vw;
+    height: 55px;
+    width: 100%;
 }
-/* end cointainer */
 #dogPoop{
     position:absolute;
     height:5vh;
     display:none;
+    cursor: pointer;
 }
 #dogPee{
     position: absolute;
     height:5vh;
     display:none;
+    cursor: pointer;
 }
 #dogFood{
     position: absolute;
     height: 5vh;
+    top: 275px;
+    left: 514px;
 }
 #dogWater{
-    position: static;
+    position: absolute;
     height:5vh;
     margin-top: 30px;
+    top: 269px;
+    left: 499px;
 }
 #dogRug{
     position: absolute;
@@ -155,15 +174,12 @@ hr{
 }
 #dogHouse {
     position: absolute;
-    right: 4px;
-    top: 40vh;
+    right: 222px;
+    top: 37vh;
     height: 15vh;
     display: none;
     z-index: 3;
 }
-/*end grid settings and main containers */
-/* dog animation */
-
 .dogSprite{
     height:10vh;
     position: relative;
@@ -200,123 +216,181 @@ hr{
     0% {
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
-        left:0%;
-        top:0%;
+        top: 255px;
+        left:245px;
     }
     25% {
-        left:85%;
-        top: 25%;
+        left:445px;
+        top: 205px;
     }
     50% {
-        left:80%;
-        top:70%;
+        left:745px;
+        top: 310px;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
     }
     75%{
-        left:20%;
-        top:70%;
+        left:245px;
+        top: 270px;
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }
     90%{
-        left:55%;
-        top:40%;
+        left:568px;
+        top: 285px;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
     }
     100%{
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
-        left:0%;
-        top:0%;
+        top: 255px;
+        left:245px;
     }
 }
 @keyframes dogMovement2 {
     0% {
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
-        left:0%;
-        top:0%;
+        top: 285px;
+        left:245px;
     }
     25% {
-        left:45%;
-        top: 70%;
+        left:445px;
+        top: 305px;
     }
     50% {
-        left:20%;
-        top:70%;
+        left:645px;
+        top: 255px;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
     }
     75%{
-        left:80%;
-        top:70%;
+        left:245px;
+        top: 295px;
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }
     90%{
-        left:55%;
-        top:40%;
+        left:245px;
+        top: 265px;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
     }
     100%{
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
-        left:0%;
-        top:0%;
+        top: 285px;
+        left:245px;
     }
 }
 @keyframes dogMovement3 {
     0% {
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
-        left:0%;
-        top:0%;
+        top: 285px;
+        left:245px;
     }
     25% {
-        left:20%;
-        top: 50%;
+        left:445px;
+        top: 305px;
     }
     50% {
-        left:50%;
-        top:20%;
+        left:645px;
+        top: 255px;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
     }
     75%{
-        left:32%;
-        top:70%;
+        left:245px;
+        top: 295px;
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }
     90%{
-        left:80%;
-        top:15%;
+        left:245px;
+        top: 265px;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
     }
     100%{
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
-        left:0%;
-        top:0%;
+        top: 285px;
+        left:245px;
     }
 }
 @keyframes dogFeed {
-    100%{
+    0% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        top: 285px;
+        left:245px;
+    }
+    25% {
+        left:445px;
+        top: 305px;
+    }
+    50% {
+        left:645px;
+        top: 255px;
         -webkit-transform: scaleX(1);
-        left:0%;
-        top:1%;
+        transform: scaleX(1);
+    }
+    75%{
+        left:245px;
+        top: 295px;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    90%{
+        left:245px;
+        top: 265px;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    100%{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        top: 285px;
+        left:245px;
     }
 }
 @keyframes dogSleep {
-    100%{
-        left:40vw;
-        top:25vh;
+    0% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        top: 285px;
+        left:245px;
     }
-
+    25% {
+        left:445px;
+        top: 305px;
+    }
+    50% {
+        left:645px;
+        top: 255px;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    75%{
+        left:245px;
+        top: 295px;
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    90%{
+        left:245px;
+        top: 265px;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+    100%{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        top: 285px;
+        left:245px;
+    }
 }
 /* end dog animation */
 /* progress bar style */
@@ -346,15 +420,14 @@ hr{
 /* shop styling */
 .shopItem{
     text-align: center;
-    margin-top: 5vh;
-    margin-left: 4vw;
-    margin-right: 4vw;
+    position: relative;
 }
 .shopImg{
     width: 80px;
     height: 80px;
     border: #EF6F6C 2px solid;
-    border-radius: 50%;
+    padding: 8px;
+    /* border-radius: 50%; */
 }
 .notication{
     position: absolute;
@@ -373,40 +446,329 @@ hr{
     font-size: 22px;
 }
 .progress{
-    height: 25px !important;
+    height: 16px !important;
+    border-radius: 6.25rem !important;
 }
 .start-game{
     position: absolute;
-    top: 21vh;
-    width: 550px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     z-index: 33333;
-    background-image: url(../images/bg-start-game.png);
-    background-size: cover;
+    background-image: url("../images/bg-start-game.png");
     background-repeat: no-repeat;
-    background-position: center;
-    left: 35%;
-    right: 50%;
-    padding: 16px;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-size: cover;
+    /* background-image: linear-gradient(to right, rgba(255, 153, 0, 0), rgba(255, 153, 0, 1)); */
+    overflow: hidden;
 }
 .title-game{
-    font-family: 'Allison', cursive;
-    font-size: 60px;
-    position: absolute;
-    top: -6px;
-    left: 10px;
+    font-size: 160px;
+    font-family: 'Black Ops One', cursive;
 }
-.btn-help{
-    font-size: 23px;
+.menu-game{
     position: absolute;
-    top: 84px;
-    left: 104px;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Black Ops One', cursive;
+    right: 358px;
+    bottom: 83px;
+
+}
+.menu-item {
+    height: 70px;
+    margin: 10px 0 0 0;
+    font-size: 80px;
+    color: black;
+    position: relative;
+  }
+  .menu-item:hover{
+    text-shadow: 2px 4px 0px rgba(20, 20, 200, 0.5);
+  }
+  .menu-item:hover::before{
+    content: "";
+    position: absolute;
+    left: -52px;
+    top: 25px;
+    height: 40px;
+    width: 50px;
+    background-color: red;
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 10% 50%);
+    animation-name: finger;
+    animation-duration: 0.01s;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+  }
+  .menu-item:hover::after{
+    content: "";
+    position: absolute;
+    right: -55px;
+    top: 25px;
+    height: 40px;
+    width: 50px;
+    background-color: red;
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 10% 50%);
+    transform: rotate(180deg);
+    animation-name: finger;
+    animation-duration: 0.01s;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+  }
+  @keyframes finger{
+    0% {left: -55px;}
+    100% {left: -75px;}
+  }
+.btn-help{
+    font-size: 37px;
+    position: absolute;
+    top: 236px;
+    left: 316px;
 }
 .btn-start{
-    font-size: 23px;
+    font-size: 37px;
     position: absolute;
-    top: 84px;
-    right: 125px;
+    top: 236px;
+    right: 316px;
+}
+
+.game-over{
+    top: 0;
+    position: absolute;
+    z-index: 33333;
+    width: 750px;
+    height: 580px;
+    left: 323px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 40px;
+    -webkit-animation-name: animacao1;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function:  linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -moz-animation-name: animacao1;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function:  linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate; 
+    animation-name: animacao1;
+    animation-duration: 1s;
+    animation-timing-function:  linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@-webkit-keyframes animacao1 {
+    0% {background: #D62623;}
+    50% {background: #EE3430;}
+    100% {background: #FB3733;} 
+}
+
+@-moz-keyframes animacao1 { 
+    0% {background: #D62623;}
+    50% {background: #EE3430;}
+    100% {background: #FB3733;} 
+}
+
+@keyframes animacao1 { 
+    0% {background: #D62623;}
+    50% {background: #EE3430;}
+    100% {background: #FB3733;} }
+
+
+.gameover {
+    padding-top: 60px;
+}
+
+.gameover p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 160px;
+    font-family: 'Black Ops One', cursive;
+    line-height: 120px;
+    text-align: center;
+    text-shadow: 5px 5px #000000;
+    color: #ffffff;
+}
+.continue{
+    width: 100%;
+    height: auto;
+    padding-top: 40px;
+}
+.continue p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: corbel;
+    color: #ffffff;
+    text-shadow: 2.5px 2.5px #000000;
+}
+.opcoes {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 24px 0 24px;
+}
+.yes{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: corbel;
+    color: #ffffff;
+    text-shadow: 2.5px 2.5px #000000;
+    padding: 10px 34px 10px ;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background: #006400;
+    margin-right: 30px;
+    float: left;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+@-webkit-keyframes animacao2 { 
+    from {-webkit-transform: scale(1);} 
+    to {-webkit-transform: scale(1.2);} }
+
+@-moz-keyframes animacao2 { 
+    from {-moz-transform: scale(1);} 
+    to {-moz-transform: scale(1.1);} }
+
+@keyframes animacao2 { 
+    from {
+        transform: scale(1);
+    } 
+    to {
+        transform: scale(1.1);
+    }
+ }
+.yes:hover {
+    -webkit-animation-name: animacao2;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-timing-function:  linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    color: #ffffff;
+    -moz-animation-name: animacao2;
+    -moz-animation-duration: 0.8s;
+    -moz-animation-timing-function:  linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    animation-name: animacao2;
+    animation-duration: 0.8s;
+    animation-timing-function:  linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.no{
+    text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	font-family: corbel;
+	color: #ffffff;
+	text-decoration: none !important;
+	text-shadow: 1.5px 1.5px #FB3733;
+	padding: 10px 34px 10px 34px;
+	border-radius: 20px;
+	background: #000000;
+	float: left;
+    cursor: pointer;
+}
+@-webkit-keyframes animacao3 { 
+    0% {-webkit-transform: translate(-5px,0px);} 
+    25% {-webkit-transform: translate(-2.5px, 0px);}
+    50% {-webkit-transform: translate(0px, 0px);}
+    75% {-webkit-transform: translate(2.5px, 0px);}
+    100% {-webkit-transform: translate(5px, 0px);} 
+}
+@-moz-keyframes animacao3 { 
+    0% {-moz-transform: translate(-5px,0px);} 
+    25% {-moz-transform: translate(-2.5px, 0px);}
+    50% {-moz-transform: translate(0px, 0px);}
+    75% {-moz-transform: translate(2.5px, 0px);}
+    100% {-moz-transform: translate(5px, 0px);} 
+}
+@keyframes animacao3 { 
+    0% {transform: translate(-5px,0px);} 
+    25% {transform: translate(-2.5px, 0px);}
+    50% {transform: translate(0px, 0px);}
+    75% {transform: translate(2.5px, 0px);}
+    100% {transform: translate(5px, 0px);} 
+}
+.no:hover {
+    color: #ffffff;
+    -webkit-animation-name: animacao3;
+    -webkit-animation-duration: 0.15s;
+    -webkit-animation-timing-function:  linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -moz-animation-name: animacao3;
+    -moz-animation-duration: 0.15s;
+    -moz-animation-timing-function:  linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    animation-name: animacao3;
+    animation-duration: 0.15s;
+    animation-timing-function:  linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.music{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.music button{ 
+    border:none; 
+    cursor:pointer; 
+    outline:none; 
+}
+.music button#playpausebtn{	
+    background:url(https://image.flaticon.com/icons/svg/189/189889.svg) no-repeat;
+	width:50px;
+	height:50px;
+}
+.music button#mutebtn{
+    background:url(https://image.flaticon.com/icons/svg/204/204287.svg) no-repeat;
+	width:50px;
+	height:50px;
+}
+.template-help {
+    position: absolute;
+    z-index: 33333;
+    width: 750px;
+    height: 580px;
+    background-color: #ffffff;
+    padding: 16px;
+    top: 28px;
+    border-radius: 20px;
+    left: 321px;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+button:focus{
+    outline: none !important;
+}
+.badge-coins{
+    position: absolute;
+    color: #fff;
+    background-color: #D62623;
+    font-size: 16px;
+    padding: 0px 16px;
+    border-radius: 50px;
+    top: 14px;
+    right: -25px;
+    margin-top: -15px;
+    font-style: italic;
+    font-weight: 600;
+    font-family: Oswald;
+}
+.content-help{
+    font-style: italic;
+    font-weight: 600;
+    font-family: Oswald;
+}
+.title-content-help{
+    font-size: 24px;
+    color: #D62623;
+
 }
