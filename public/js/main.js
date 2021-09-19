@@ -28,21 +28,21 @@ audio = new Audio();
 document.getElementById("template-help").style.display = "none";
 
 window.onload = function() {
-  // audio.src = "./public/music/start-game.mp3";
-  // audio.loop = true;
-  // audio.oncanplaythrough = (event) => {
-  //   var playedPromise = audio.play();
-  //   if (playedPromise) {
-  //     playedPromise.catch((e) => {
-  //       if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-  //         audio.pause();
-  //         audio.load()
-  //       }
-  //     }).then(() => {
-  //       console.log("playing sound !!!");
-  //     });
-  //   }
-  // }
+  audio.src = "./public/music/start-game.mp3";
+  audio.loop = true;
+  audio.oncanplaythrough = (event) => {
+    var playedPromise = audio.play();
+    if (playedPromise) {
+      playedPromise.catch((e) => {
+        if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+          audio.pause();
+          audio.load()
+        }
+      }).then(() => {
+        console.log("playing sound !!!");
+      });
+    }
+  }
 }
 
 let randomNumber = (min, max) => {
@@ -81,9 +81,9 @@ let time = () => {
   }
 
   else {
-    // thirst -= 8;
-    // hunger -= 4;
-    // happiness -= 10;
+    thirst -= 8;
+    hunger -= 4;
+    happiness -= 10;
     setHungerProgress(hunger);
     setThirstProgress(thirst);
     setHappinessProgress(happiness);
@@ -286,15 +286,15 @@ let help = () => {
   document.getElementById("template-help").style.display = "block"
 }
 let start = () => {
-//  setTimeout(() => {
-//   audio.pause();
-//  }, 100);
+ setTimeout(() => {
+  audio.pause();
+ }, 100);
   startGames.style.display = "none";
   coinCount.style.display = "flex"
   gridCont.style.display = "block";
   time();
   poopGen();
-  // initAudioPlayer();
+  initAudioPlayer();
   setInterval(time, 10000);
   setInterval(poopGen, 7000);
 }
@@ -312,7 +312,7 @@ let continueGame = () => {
   gridCont.style.display = "block";
   time();
   poopGen();
-  // initAudioPlayer();
+  initAudioPlayer();
   setInterval(time, 10000);
   setInterval(poopGen, 7000);
   gameOver.style.display = "none"
