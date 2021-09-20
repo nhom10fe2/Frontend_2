@@ -1,5 +1,5 @@
 //Declaring all game variables
-let count = 0;
+let count = 2;
 let hunger = 100;
 let thirst = 100;
 let happiness = 100;
@@ -15,19 +15,20 @@ let peeSprite = document.getElementById('dogPee');
 let foodBowl = document.getElementById('dogFood');
 let waterBowl = document.getElementById('dogWater');
 let startGames = document.getElementById('start-game');
-startGames.style.display = "block";
 let coinCount = document.getElementById('coinCount');
-coinCount.style.display = "none";
 let gridCont = document.getElementById('gridCont');
-gridCont.style.display = "none";
 document.getElementById("notication").style.display = "none";
 let gameOver = document.getElementById('gameOver');
-gameOver.style.display = "none"
 var audio, playbtn, mutebtn, seek_bar;
-audio = new Audio();
 document.getElementById("template-help").style.display = "none";
-
-window.onload = function() {
+let foodFree = document.getElementById("foodFree");
+window.onload = function () {
+  audio = new Audio();
+  gameOver.style.display = "none"
+  foodFree.innerHTML = `+ ${count} Free`;
+  gridCont.style.display = "none";
+  coinCount.style.display = "none";
+  startGames.style.display = "block";
   audio.src = "./public/music/start-game.mp3";
   audio.loop = true;
   audio.oncanplaythrough = (event) => {
@@ -44,7 +45,6 @@ window.onload = function() {
     }
   }
 }
-
 let randomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
 }
@@ -135,37 +135,37 @@ let setHappinessProgress = (data) => {
 
 let replenish = (type) => {
   if (type == 1) {
-    if (hunger == 100) {
-      configTypeButton("none");
-      document.getElementById("notication").style.display = "block";
-      document.getElementById("title-notication").innerHTML = `
-      <span>Thức ăn của cún đã </span>
-      <br>
-      <b>đầy đủ</b>
-      `
+    count = count - 1
+    if (count <= 0) {
+      foodFree.innerHTML = 20
+      console.log("hết lượt miễn phí");
+    } else {
+      foodFree.innerHTML = `+ ${count} Free`
+      console.log("còn lượt miễn phí");
+      if (hunger == 100) {
+        configTypeButton("none");
+        document.getElementById("notication").style.display = "block";
+        document.getElementById("title-notication").innerHTML = `
+        <span>Thức ăn của cún đã </span>
+        <br>
+        <b>đầy đủ</b>
+        `
+
+      }
+      else {
+        foodBowl.src = "./public/images/dopFood.jpg";
+        dog.className = 'dogSprite dogSpriteAnimFeed'
+        hunger += 30;
+        if (coins < 0) { coins = 0; };
+        if (hunger > 100) { hunger = 100; };
+        setHungerProgress(hunger);
+        coinTab.textContent = coins
+        setTimeout(function () {
+          replenishReversal(1);
+        }, 10000)
+      }
     }
-    else if (coins < 20) {
-      configTypeButton("none");
-      document.getElementById("notication").style.display = "block";
-      document.getElementById("title-notication").innerHTML = `
-      <span>Bạn không đủ điểm để mua thêm </span>
-      <br>
-      <b>Thức ăn</b>
-      `
-    }
-    else if (coins >= 20) {
-      foodBowl.src = "./public/images/dopFood.jpg";
-      dog.className = 'dogSprite dogSpriteAnimFeed'
-      coins -= 20;
-      hunger += 30;
-      if (coins < 0) { coins = 0; };
-      if (hunger > 100) { hunger = 100; };
-      setHungerProgress(hunger);
-      coinTab.textContent = coins
-      setTimeout(function () {
-        replenishReversal(1);
-      }, 10000)
-    }
+
   }
   else if (type == 2) {
     if (thirst == 100) {
@@ -286,9 +286,9 @@ let help = () => {
   document.getElementById("template-help").style.display = "block"
 }
 let start = () => {
- setTimeout(() => {
-  audio.pause();
- }, 100);
+  setTimeout(() => {
+    audio.pause();
+  }, 100);
   startGames.style.display = "none";
   coinCount.style.display = "flex"
   gridCont.style.display = "block";
@@ -299,7 +299,7 @@ let start = () => {
   setInterval(poopGen, 7000);
 }
 let continueGame = () => {
-  coins -=coins;
+  coins -= coins;
   setTimeout(() => {
     count = 0;
     hunger = 100;
@@ -320,9 +320,9 @@ let continueGame = () => {
 let blackGame = () => {
   audio.pause();
   startGames.style.display = "block";
-  coinCount.style.display = "none";
-  gridCont.style.display = "none";
-  gameOver.style.display = "none"
+  coinCount.style.display = "none !important";
+  gridCont.style.display = "none !important";
+  gameOver.style.display = "none !important"
 }
 function initAudioPlayer() {
   audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
