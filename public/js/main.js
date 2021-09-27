@@ -19,25 +19,27 @@ let coinCount = document.getElementById('coinCount');
 let gridCont = document.getElementById('gridCont');
 document.getElementById("notication").style.display = "none";
 let gameOver = document.getElementById('gameOver');
-var audio, playbtn, mutebtn, seek_bar;
+var audio, audioStart, playbtn, mutebtn, seek_bar;
 document.getElementById("template-help").style.display = "none";
 let foodFree = document.getElementById("foodFree");
+countaddPuppy = 1;
+countaddHouse = 1;
 window.onload = function () {
-  audio = new Audio();
+  audioStart = new Audio();
   gameOver.style.display = "none"
   foodFree.innerHTML = `+ ${count} Free`;
   gridCont.style.display = "none";
   coinCount.style.display = "none";
   startGames.style.display = "block";
-  audio.src = "./public/music/start-game.mp3";
-  audio.loop = true;
-  audio.oncanplaythrough = (event) => {
-    var playedPromise = audio.play();
+  audioStart.src = "./public/music/start-game.mp3";
+  audioStart.loop = true;
+  audioStart.oncanplaythrough = (event) => {
+    var playedPromise = audioStart.play();
     if (playedPromise) {
       playedPromise.catch((e) => {
         if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-          audio.pause();
-          audio.load()
+          audioStart.pause();
+          audioStart.load()
         }
       }).then(() => {
         console.log("playing sound !!!");
@@ -88,6 +90,10 @@ let time = () => {
     setThirstProgress(thirst);
     setHappinessProgress(happiness);
   }
+  if (hunger == 100 && thirst == 100 && happiness == 100) {
+    coins += 100;
+    coinTab.textContent = coins
+  }
 };
 
 let poopGen = () => {
@@ -136,12 +142,43 @@ let setHappinessProgress = (data) => {
 let replenish = (type) => {
   if (type == 1) {
     count = count - 1
-    if (count <= 0) {
+    if (count < 0 || count == 0) {
       foodFree.innerHTML = 20
       console.log("hết lượt miễn phí");
+      if (hunger == 100) {
+        configTypeButton("none");
+        document.getElementById("notication").style.display = "block";
+        document.getElementById("title-notication").innerHTML = `
+        <span>Thức ăn của cún đã </span>
+        <br>
+        <b>đầy đủ</b>
+        `
+
+      }
+      else if (coins < 20) {
+        configTypeButton("none");
+        document.getElementById("notication").style.display = "block";
+        document.getElementById("title-notication").innerHTML = `
+        <span>Bạn không đủ điểm để mua thêm</span>
+        <br>
+        <b>Thức ăn</b>
+        `
+      }
+      else if (coins >= 20) {
+        foodBowl.src = "./public/images/dopFood.jpg";
+        dog.className = 'dogSprite dogSpriteAnimFeed'
+        hunger += 20;
+        coins -= 20;
+        if (coins < 0) { coins = 0; };
+        if (hunger > 100) { hunger = 100; };
+        setHungerProgress(hunger);
+        coinTab.textContent = coins
+        setTimeout(function () {
+          replenishReversal(1);
+        }, 10000)
+      }
     } else {
       foodFree.innerHTML = `+ ${count} Free`
-      console.log("còn lượt miễn phí");
       if (hunger == 100) {
         configTypeButton("none");
         document.getElementById("notication").style.display = "block";
@@ -155,7 +192,7 @@ let replenish = (type) => {
       else {
         foodBowl.src = "./public/images/dopFood.jpg";
         dog.className = 'dogSprite dogSpriteAnimFeed'
-        hunger += 30;
+        hunger += 20;
         if (coins < 0) { coins = 0; };
         if (hunger > 100) { hunger = 100; };
         setHungerProgress(hunger);
@@ -190,7 +227,7 @@ let replenish = (type) => {
       waterBowl.src = "./public/images/dogWater.jpg";
       dog.className = 'dogSprite dogSpriteAnimFeed'
       coins -= 10;
-      thirst += 30;
+      thirst += 10;
       if (coins < 0) { coins = 0; };
       if (thirst > 100) { thirst = 100; }
       setThirstProgress(thirst);
@@ -210,7 +247,7 @@ let replenish = (type) => {
       <b>100%</b>
       `
     }
-    else if (coins < 20) {
+    else if (coins < 30) {
       configTypeButton("none");
       document.getElementById("notication").style.display = "block";
       document.getElementById("title-notication").innerHTML = `
@@ -218,9 +255,9 @@ let replenish = (type) => {
       <br>
       <b>Đồ chơi</b>
       `
-    } else if (coins >= 20) {
-      coins -= 20;
-      happiness += 20;
+    } else if (coins >= 30) {
+      coins -= 30;
+      happiness += 30;
       if (coins < 0) { coins = 0; };
       if (happiness > 100) { happiness = 100; }
       setHappinessProgress(happiness);
@@ -240,19 +277,32 @@ let replenishReversal = (type) => {
 };
 
 let addPuppy = () => {
-  if (coins < 100) {
+  if (countaddPuppy == 0 || countaddPuppy < 0) {
     document.getElementById("notication").style.display = "block";
     document.getElementById("title-notication").innerHTML = `
-    <span>Bạn không đủ điểm để mua thêm</span>
+    <span>Mỗi lượt chơi chỉ cho phép mua một </span>
     <br>
     <b>Cún con</b>
     `
   }
-  else if (coins >= 100) {
-    dog2.style.display = "block"
-    coins -= 100;
-    coinTab.textContent = coins
+  else {
+    if (coins < 100) {
+      document.getElementById("notication").style.display = "block";
+      document.getElementById("title-notication").innerHTML = `
+    <span>Bạn không đủ điểm để mua thêm</span>
+    <br>
+    <b>Cún con</b>
+    `
+    }
+    else if (coins >= 100) {
+      dog2.style.display = "block"
+      coins -= 100;
+      happiness += 60;
+      if (happiness > 100) { happiness = 100; }
+      coinTab.textContent = coins
+    }
   }
+  countaddPuppy -= 1;
 }
 let configTypeButton = (type) => {
   if (type === "none") {
@@ -264,19 +314,31 @@ let configTypeButton = (type) => {
 }
 
 let addHouse = () => {
-  if (coins < 150) {
+  if (countaddHouse == 0 || countaddHouse < 0) {
     document.getElementById("notication").style.display = "block";
     document.getElementById("title-notication").innerHTML = `
-    <span>Bạn không đủ điểm để mua </span>
+    <span>Mỗi lượt chơi chỉ cho phép mua một </span>
     <br>
     <b>Nhà cho chó</b>
     `
+  } else {
+    if (coins < 150) {
+      document.getElementById("notication").style.display = "block";
+      document.getElementById("title-notication").innerHTML = `
+      <span>Bạn không đủ điểm để mua </span>
+      <br>
+      <b>Nhà cho chó</b>
+      `
+    }
+    else if (coins >= 150) {
+      document.getElementById("dogHouse").style.display = "block";
+      coins -= 150;
+      happiness += 90;
+      if (happiness > 100) { happiness = 100; }
+      coinTab.textContent = coins
+    }
   }
-  else if (coins >= 150) {
-    document.getElementById("dogHouse").style.display = "block";
-    coins -= 150;
-    coinTab.textContent = coins
-  }
+  countaddHouse -= 1;
 };
 let closeNotication = () => {
   document.getElementById("notication").style.display = "none";
@@ -286,9 +348,7 @@ let help = () => {
   document.getElementById("template-help").style.display = "block"
 }
 let start = () => {
-  setTimeout(() => {
-    audio.pause();
-  }, 100);
+  audioStart.pause();
   startGames.style.display = "none";
   coinCount.style.display = "flex"
   gridCont.style.display = "block";
@@ -318,26 +378,50 @@ let continueGame = () => {
   gameOver.style.display = "none"
 }
 let blackGame = () => {
-  audio.pause();
+  gameOver.style.display = "none";
   startGames.style.display = "block";
-  coinCount.style.display = "none !important";
-  gridCont.style.display = "none !important";
-  gameOver.style.display = "none !important"
-}
-function initAudioPlayer() {
-  audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
-  audio.loop = true;
-  audio.oncanplaythrough = (event) => {
-    var playedPromise = audio.play();
+  coinCount.style.display = "none";
+  gridCont.style.display = "none";
+  count = 0;
+  hunger = 100;
+  thirst = 100;
+  happiness = 100;
+  coins = 100;
+  audio.pause();
+  audioStart.src = "./public/music/start-game.mp3";
+  audioStart.loop = true;
+  audioStart.oncanplaythrough = (event) => {
+    var playedPromise = audioStart.play();
     if (playedPromise) {
       playedPromise.catch((e) => {
-        console.log(e)
         if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-          console.log(e.name);
+          audioStart.pause();
+          audioStart.load()
         }
       }).then(() => {
         console.log("playing sound !!!");
       });
+    }
+  }
+}
+let initAudioPlayer=()=>{
+  audio = new Audio();
+  var pause = audio.pause()
+  if (pause) {
+    audio.play();
+  } else {  
+    audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
+    audio.loop = true;
+    audio.oncanplaythrough = (event) => {
+      var playedPromise = audio.play();
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+          }
+        }).then(() => {
+          console.log("playing sound !!!");
+        });
+      }
     }
   }
   // Set object references
