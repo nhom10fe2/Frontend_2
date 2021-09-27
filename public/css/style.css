@@ -175,11 +175,11 @@ hr{
 }
 #dogHouse {
     position: absolute;
-    right: 222px;
-    top: 37vh;
+    left: 45%;
+    top: 32vh;
     height: 15vh;
     display: none;
-    z-index: 3;
+    /* z-index: 3; */
 }
 .dogSprite{
     height:10vh;
@@ -529,72 +529,7 @@ hr{
     0% {left: -55px;}
     100% {left: -75px;}
   }
-.coin-add{
-    position: absolute;
-    /* top: 0; */
-    left: 23%;
-    width: 1100px;
-    height: 64vh;
-}
-.coin-add .bubbles{
-    z-index: 333;
-    width: 1100px !important;
-    height: 64vh !important;
-}
-.bubbles circle {
-    z-index: 333;
-    fill: yellow;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 
-}
-.bubbles-large {
-    overflow: initial;
-    z-index: 333;
-
-}
-.bubbles-large > g {
-    transform: translateY(2048px);
-    opacity: 0;
-    will-change: transform, opacity;
-    z-index: 333;
-
-}
-.bubbles-large g {
-    z-index: 333;
-    animation: up 60s infinite;
-}
-.bubbles-large g g {
-    z-index: 333;
-
-    transform: translateX(350px);
-}
-.bubbles-large g circle {
-    z-index: 333;
-
-    animation: wobble 10s infinite ease-in-out;
-}
-
-@keyframes wobble {
- 33% {
-    transform: translateX(-50px);
-  }
-  66% {
-    transform: translateX(50px);
-  }
-}
-
-@keyframes up {
-    0% {
-        opacity: 0;
-    }
-    10%, 90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-1024px);
-    }
-}
 .btn-help{
     font-size: 37px;
     position: absolute;
