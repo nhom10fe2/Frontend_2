@@ -277,6 +277,7 @@ let replenishReversal = (type) => {
 };
 
 let addPuppy = () => {
+  countaddPuppy -= 1;
   if (countaddPuppy == 0 || countaddPuppy < 0) {
     document.getElementById("notication").style.display = "block";
     document.getElementById("title-notication").innerHTML = `
@@ -302,7 +303,6 @@ let addPuppy = () => {
       coinTab.textContent = coins
     }
   }
-  countaddPuppy -= 1;
 }
 let configTypeButton = (type) => {
   if (type === "none") {
@@ -312,14 +312,14 @@ let configTypeButton = (type) => {
   }
 
 }
-
 let addHouse = () => {
+  countaddHouse -= 1;
   if (countaddHouse == 0 || countaddHouse < 0) {
     document.getElementById("notication").style.display = "block";
     document.getElementById("title-notication").innerHTML = `
     <span>Mỗi lượt chơi chỉ cho phép mua một </span>
     <br>
-    <b>Nhà cho chó</b>
+    <b>Nhà cho thú cưng</b>
     `
   } else {
     if (coins < 150) {
@@ -327,7 +327,7 @@ let addHouse = () => {
       document.getElementById("title-notication").innerHTML = `
       <span>Bạn không đủ điểm để mua </span>
       <br>
-      <b>Nhà cho chó</b>
+      <b>Nhà cho thú cưng</b>
       `
     }
     else if (coins >= 150) {
@@ -338,7 +338,6 @@ let addHouse = () => {
       coinTab.textContent = coins
     }
   }
-  countaddHouse -= 1;
 };
 let closeNotication = () => {
   document.getElementById("notication").style.display = "none";
